@@ -1,65 +1,53 @@
-# Description
+# SANS Book Index Generator
 
-This is a python script used to generate an index for a SANS book. It uses the OpenAI GPT-4 model to identify key terms and their definitions from each page of the book. The index is then written to a CSV file.
+## Description
 
-It consists of two main scripts:
+This Python script generates an index for a SANS book by leveraging the OpenAI GPT-4 model to identify key terms and their definitions from each page of the book. The generated index is then written to a CSV file for convenience.
 
-1. index.py - This script goes through each page of a given PDF and uses GPT-4 to identify a key term and its definition on that page, creating an index file for that book.
+The project consists of two main components:
 
-2. combiner.py - This script combines the index files of multiple books into a composite index file.
+- `index.py`: Parses through each page of a given PDF(s) and utilizes GPT-4 to identify key terms and their definitions on that page, generating an index file for the book.
+- `combiner.py`: Merges the .csv files from multiple books into a single composite index file.
 
-# Setup Instructions
+## Setup Instructions
 
-1. Clone the repository.
-2. Install the necessary dependencies by running pip install -r requirements.txt in your terminal.
-3. Create a .env file in the root directory of the project.
-4. Download course pdfs from https://www.sans.org/account/download-materials
-5. Remove pdf password through qpdf: qpdf --password=enterpasswordhere -decrypt "InputFilename.pdf" "OutputFilename.pdf"
+### Prerequisites
 
-# .env file
+- Clone the repository to your local machine.
+- Install the necessary Python dependencies by executing `pip install -r requirements.txt` in your terminal.
+- Create a `.env` file in the root directory of the project following the template provided below.
+- Download the course PDFs from [SANS Download Materials](https://www.sans.org/account/download-materials).
+- Place the book PDFs inside the `Books` directory.
+- Update `Index.py` to reflect your book naming convention.
 
-The file should contain the following:
+### `.env` File Configuration
 
-```
+Your `.env` file should include:
+
+```plaintext
 OPENAI_API_KEY=<your-openai-api-key>
 PDF_PASSWORD=<your-pdf-password>
 ```
 
-Replace <your-openai-api-key> and <your-pdf-password> with your actual OpenAI API key and PDF password. Make sure to not have any spaces or single or double quotes surrouding your key and password in the .env file. 
+Replace `<your-openai-api-key>` and `<your-pdf-password>` with your actual OpenAI API key and PDF password, respectively. Ensure there are no spaces or quotes around the values in the `.env` file.
 
-# OpenAI API Key
+### Obtaining an OpenAI API Key
 
-To obtain an OpenAI API Key, follow these steps:
+1. Visit the [OpenAI website](https://openai.com/).
+2. Sign up for an account or log in if you already have one.
+3. Navigate to the API section in your account dashboard.
+4. Generate a new API Key and ensure your account is funded.
+5. **Important:** Treat your API keys as sensitive data. Do not expose them publicly or share them with untrusted parties.
 
-- Visit the OpenAI website.
-- Sign up for an account if you don't already have one.
-- Go to the API section in the account dashboard.
-- Generate a new API Key.
+### Adjustments
 
-Remember to treat your API keys as sensitive data, do not expose them publicly or to anyone you do not trust.
+You may need to adjust the naming of the books/courses in the code as indicated by comments. The default setup uses names like "FOR500_B1" for book 1, "FOR500_B2" for book 2, etc. Adjust these names to match your specific class/books.
 
-# Adjustments
+## Usage
 
-You will need to adjust the name of the book/course at a few points in the code indicated by comments. The current scripts are set up to use book names of "SEC5881" for book 1, "SEC5882" for book 2, etc. You can change this to however you need. 
+1. Execute the `index.py` script to index each PDF in the `Books` directory. The files may not be processed in order, but this is expected behavior.
+2. After all books have been indexed, run the `combiner.py` script to generate a composite index file for all the books.
 
-If you are creating indexes for more books or less books, adjust the range in the second for loop in combiner.py to match the number of books you are indexing.
-Running the Scripts
+## Final Notes
 
-1. Run the index.py script for each book you want to index.
-2. Once all books have been indexed, run the combiner.py script to create a composite index of all the books.
-
-# Error Handling
-
-If you receive an error stating that gpt-4 is not available, you will need to replace "gpt-4" in the openai.ChatCompletion.create() call with the identifier of the most recent model available in the OpenAI models list.
-
-Visit the OpenAI Models page to see the currently available models.
-
-Please note that using a different model may result in differing results from the ones mentioned above.
-
-# Final Notes
-
-The scripts provided assume a specific format and content for the PDF and might not work as expected for all SANS books or other types of documents. You may need to tweak the scripts based on the specifics of your PDFs.
-
-Once the index is fully generated you can open it in excel and format appropriately to your preference. Here is an example of the final product:
-
-![Example Image](example.png)
+The provided scripts assume specific formats and content structures for the PDFs and may not work perfectly with all SANS books or different types of documents. While the output should not be blindly trusted, it can serve as a valuable starting point or a last resort if necessary.
