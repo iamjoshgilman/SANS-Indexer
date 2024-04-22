@@ -48,6 +48,10 @@ You may need to adjust the naming of the books/courses in the code as indicated 
 1. Execute the `index.py` script to index each PDF in the `Books` directory. The files may not be processed in order, but this is expected behavior.
 2. After all books have been indexed, run the `combiner.py` script to generate a composite index file for all the books.
 
+## Troubleshooting
+
+**Rate Limit:** Ensure you have funded your OpenAi account; billing was recently changed.
+
 ## Final Notes
 
 The provided scripts assume specific formats and content structures for the PDFs and may not work perfectly with all SANS books or different types of documents. While the output should not be blindly trusted, it can serve as a valuable starting point or a last resort if necessary.
