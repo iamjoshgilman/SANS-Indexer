@@ -41,7 +41,7 @@ def process_pdf(pdf_path):
             prompt = f"Your task is to analyze a single page from a SANS textbook, focusing specifically on Cloud, Cybersecurity, and Threat Detection. Identify the most crucial term or concept on this page. If the page lacks substantive material or is a title page, respond with 'none'. The selected term must be directly related to the core topics mentioned, concise, and hold significant relevance to the content on the page. Aim for a term or a succinct phrase of no more than 3-4 words. Alongside the term, provide a comprehensive definition, prioritizing completeness over brevity. This definition should be concise, ideally between 10-25 words, and separated from the term by a comma. Ensure the term is explored in detail on the page rather than mentioned briefly. Exclude complex phrases, author names, page numbers, course titles, or overly broad concepts. For terms related to broader topics or tools with many subcategories, format them to group similar topics together. For MITRE ATT&CK techniques, list only the T-code and the technique's name. This task aims to create an index of the book, so please focus on identifying key terms that are concrete, relevant, and crucial to the page's content. Here is the next page: \n\n{text}"
 
             try:
-                response = client.chat.completions.create(model="gpt-4-turbo-preview",
+                response = client.chat.completions.create(model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a knowledgeable assistant helping to index a book."}, {"role": "user", "content": prompt}],
                 max_tokens=1024,
                 temperature=0.5)
